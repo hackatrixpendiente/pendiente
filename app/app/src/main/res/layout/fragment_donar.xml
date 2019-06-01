@@ -13,7 +13,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="7"
+            android:layout_weight="6"
             android:background="@color/colorPrimary">
 
             <LinearLayout
@@ -25,6 +25,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/txtEmpresa"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -34,6 +35,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/txtDesc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -42,6 +44,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/txtMonto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -51,6 +54,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/txtSede"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -86,9 +90,37 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:background="@color/cardview_light_background"
-                android:text="Cantidad de Pendientes: 1"
+                android:text="Cantidad de Pendientes:"
                 android:textSize="20dp"
                 android:textStyle="bold" />
+            <EditText
+                android:id="@+id/cantidadText"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/bg_tv"
+                android:hint="Cantidad"
+                android:paddingLeft="16dp"
+                android:inputType="text"/>
+            <EditText
+                android:id="@+id/mensajeText"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/bg_tv"
+                android:hint="Mensaje"
+                android:paddingLeft="16dp"
+                android:inputType="text"/>
+
+            <Button
+                android:id="@+id/btnComprar"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/bg_btn"
+                android:text="COMPRAR PENDIENTE"
+                android:textAllCaps="false"
+                android:textColor="#000000"
+                android:textSize="20sp"/>
 
         </LinearLayout>
 
