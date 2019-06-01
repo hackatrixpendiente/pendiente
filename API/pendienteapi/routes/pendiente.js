@@ -74,8 +74,8 @@ router.post('/donar', function (req, res, next) {
     var client = new pg.Client(dbConfig);
     client.connect();
     const query = {
-        text: `SELECT * FROM public.donar_pendiente($1)`,
-        values: [datos.idDonacion],
+        text: `SELECT * FROM public.donar_pendiente($1, $2, $3)`,
+        values: [datos.idDonacion, datos.nombreReceptor, datos.imagenReceptor],
     }
     client.query(query, (err, rows) => {
         if (err) {
