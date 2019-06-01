@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,9 @@ import com.example.pendienteapp.Retrofit.RetrofitClient;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -39,6 +43,8 @@ public class DonarFragment extends Fragment {
     private TextView txtMonto;
     private TextView txtSede;
     private Button btnComprar;
+    private ImageView img_producto;
+    Map<String, Integer> map2 = new HashMap<>();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -55,6 +61,9 @@ public class DonarFragment extends Fragment {
         Retrofit retrofit = RetrofitClient.getInstance();
         Bundle bundle = this.getArguments();
         btnComprar = view.findViewById(R.id.btnComprar);
+        img_producto = view.findViewById(R.id.logo);
+        map2.put("hamburguesa", R.drawable.big);
+        map2.put("pollo", R.drawable.llopo);
         btnComprar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,8 +72,8 @@ public class DonarFragment extends Fragment {
         });
 
         myAPI = retrofit.create(INodeJS.class);
-        compositeDisposable.add(myAPI.dataempresa(1)
-        //compositeDisposable.add(myAPI.dataempresa(Integer.parseInt(bundle.getString("id")))
+        //compositeDisposable.add(myAPI.dataempresa(1)
+        compositeDisposable.add(myAPI.dataempresa(Integer.parseInt(bundle.getString("id")))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<String>() {
@@ -85,6 +94,8 @@ public class DonarFragment extends Fragment {
                             txtMonto.setText("Precios: S/."+jsonObj2.getString("precio_producto"));
                             txtSede = getView().findViewById(R.id.txtSede);
                             txtSede.setText(jsonObj2.getString("nombre_sede"));
+                            String im_producto = jsonObj2.getString("imagen_producto");
+                            img_producto.setImageResource(map2.get(im_producto));
 
                         }
                     }
