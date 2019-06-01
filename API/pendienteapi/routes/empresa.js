@@ -40,8 +40,8 @@ router.post('/producto', function(req, res, next) {
     var client = new pg.Client(dbConfig);
     client.connect();
     const query = {
-        text: `SELECT * FROM ($1)`,
-        values: [datos.idEmpresa],
+        text: `SELECT * FROM public.listarsedesproductos($1)`,
+        values: [datos.idSede],
     }
     client.query(query, (err,rows)=>{
         if(err) {
