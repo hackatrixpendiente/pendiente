@@ -1,7 +1,10 @@
 package com.example.pendienteapp.Fragments;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -42,9 +45,12 @@ public class DonarFragment extends Fragment {
     private TextView txtDesc;
     private TextView txtMonto;
     private TextView txtSede;
-    private Button btnComprar;
+    private Button btnComprar, btnfb;
     private ImageView img_producto;
+    public static String FACEBOOK_URL = "https://www.facebook.com/homer.lopezvidal";
+    public static String FACEBOOK_PAGE_ID = "homer.lopezvidal";
     Map<String, Integer> map2 = new HashMap<>();
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -61,6 +67,7 @@ public class DonarFragment extends Fragment {
         Retrofit retrofit = RetrofitClient.getInstance();
         Bundle bundle = this.getArguments();
         btnComprar = view.findViewById(R.id.btnComprar);
+
         img_producto = view.findViewById(R.id.logo);
         map2.put("hamburguesa", R.drawable.big);
         map2.put("pollo", R.drawable.llopo);
@@ -68,6 +75,30 @@ public class DonarFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "Compra realizada", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                dialog.setTitle("Felicitaciones");
+                dialog.setMessage("Has colaborado!");
+
+                LayoutInflater inflater = LayoutInflater.from(getContext());
+                View login_layout = inflater.inflate(R.layout.layout_login, null);
+
+                dialog.setView(login_layout);
+
+                dialog.show();
+
+                btnfb = login_layout.findViewById(R.id.buttonFB);
+                btnfb.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
+                        String facebookUrl = getFacebookPageURL(getContext());
+                        facebookIntent.setData(Uri.parse(facebookUrl));
+                        startActivity(facebookIntent);
+                        Toast.makeText(getContext(), "Abriendo Facebook", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
             }
         });
 
@@ -125,5 +156,19 @@ public class DonarFragment extends Fragment {
                     }
                 })
         );*/
+    }
+
+    public String getFacebookPageURL(Context context) {
+        PackageManager packageManager = context.getPackageManager();
+        try {
+            int versionCode = packageManager.getPackageInfo("com.facebook.katana", 0).versionCode;
+            if (versionCode >= 3002850) { //newer versions of fb app
+                return "fb://facewebmodal/f?href=" + FACEBOOK_URL;
+            } else { //older versions of fb app
+                return "fb://page/" + FACEBOOK_PAGE_ID;
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            return FACEBOOK_URL; //normal web url
+        }
     }
 }
