@@ -1,0 +1,67 @@
+/* Required for full background image */
+
+html,
+body,
+header,
+.view {
+height: 100%;
+}
+
+@media (max-width: 740px) {
+html,
+body,
+header,
+.view {
+height: 100vh;
+}
+}
+
+.top-nav-collapse {
+background-color: #78909c !important;
+}
+
+.navbar:not(.top-nav-collapse) {
+background: transparent !important;
+}
+
+@media (max-width: 991px) {
+.navbar:not(.top-nav-collapse) {
+background: #78909c !important;
+}
+}
+
+h1 {
+letter-spacing: 8px;
+}
+
+h5 {
+letter-spacing: 3px;
+}
+
+.hr-light {
+border-top: 3px solid #fff;
+width: 80px;
+}
+.container1{
+    display: inline-flex;
+    background-color: grey;
+    width: 100%;
+    justify-content: space-between;
+}
+.my-5{
+    display: inline-block !important;
+    
+}
+.footer2{
+    background-color: black;
+    height: 30px;
+}
+.col-md-6.col-lg-4{
+    max-width: 100% !important; 
+}
+.row{
+    flex-wrap: nowrap;
+    margin-right: 20px;
+    margin-left: 30px;
+    flex: 0 0 70% !important;
+}
