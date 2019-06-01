@@ -4,15 +4,13 @@ var router = express.Router();
 var pg = require('pg');
 var dbConfig = require('../public/javascripts/database');
 
-router.post('/producto/', function (req, res, next) { //aulas del usuario
+router.post('/pendientes', function (req, res, next) {
     var datos = req.body;
     var client = new pg.Client(dbConfig);
     client.connect();
     const query = {
-        text: `SELECT *
-                 FROM "PENDIENTEPRODUCTO"
-                WHERE "IDEMPRESA" = $1`,
-        values: [datos.idempresa],
+        text: `SELECT * FROM public.select_pendientes()`,
+        values: [],
     }
     client.query(query, (err, rows) => {
         if (err) {
