@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.example.pendienteapp.R;
 import com.example.pendienteapp.Retrofit.INodeJS;
@@ -29,6 +30,9 @@ import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 
 public class SeleccionFragment extends Fragment {
+
+    TextView id;
+
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     INodeJS myAPI;
     @Nullable
@@ -44,6 +48,16 @@ public class SeleccionFragment extends Fragment {
                     .getColor(R.color.colorPrimary));
 
         }
+
+        Bundle bundle = this.getArguments();
+
+        id = view.findViewById(R.id.txtID);
+
+        id.setText(bundle.getString("id"));
+
+
+
+
         Retrofit retrofit = RetrofitClient.getInstance();
         myAPI = retrofit.create(INodeJS.class);
         compositeDisposable.add(myAPI.datosEmpresa(1)

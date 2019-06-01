@@ -18,6 +18,13 @@
 
         </RelativeLayout>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="30dp"
+            android:paddingBottom="15dp"
+            android:text="Establecimientos cercanos a tu ubicación..."/>
+
         <GridLayout
             android:layout_weight="6"
             android:layout_width="match_parent"

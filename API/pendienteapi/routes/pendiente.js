@@ -43,8 +43,8 @@ router.post('/registro', function (req, res, next) {
     var client = new pg.Client(dbConfig);
     client.connect();
     const query = {
-        text: `SELECT * FROM public.registrar_pendiente($1, $2, $3, $4)`,
-        values: [datos.cantidad, datos.mensaje, datos.idProducto, datos.idUsuario],
+        text: `SELECT * FROM public.registrar_pendiente($1, $2, $3, $4, $5, $6)`,
+        values: [datos.cantidad, datos.mensaje, datos.idProducto, datos.idUsuario, datos.nombreReceptor, datos.imagenReceptor],
     }
     client.query(query, (err, rows) => {
         if (err) {
