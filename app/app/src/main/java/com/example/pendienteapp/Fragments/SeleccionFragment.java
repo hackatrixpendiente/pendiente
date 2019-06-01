@@ -50,9 +50,9 @@ public class SeleccionFragment extends Fragment {
 
         Bundle bundle = this.getArguments();
 
-        id = view.findViewById(R.id.txtID);
+        /*id = view.findViewById(R.id.txtID);
 
-        id.setText(bundle.getString("id"));
+        id.setText(bundle.getString("id"));*/
         myAPI = retrofit.create(INodeJS.class);
 
         datosEmpresa(1);
@@ -65,7 +65,7 @@ public class SeleccionFragment extends Fragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<String>() {
                     @Override
-                    public void accept(String s) throws JSONException {
+                    public void accept(String s) throws Exception {
                         if(s.contains("data")){
                             JSONObject jsonObj = new JSONObject(s);
                             JSONArray array = jsonObj.getJSONArray("data");

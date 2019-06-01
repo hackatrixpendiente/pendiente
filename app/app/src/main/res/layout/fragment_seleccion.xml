@@ -5,63 +5,186 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.SeleccionFragment">
-    <RelativeLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10">
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/card_view"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="50dp"
-            app:cardElevation="0dp"
+        <LinearLayout
+            android:gravity="center"
+            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerHorizontal="true">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="45dp">
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:gravity="center_horizontal"
-                android:layout_width="match_parent"
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:layout_marginTop="150dp">
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                card_view:cardCornerRadius="18dp"
+                android:backgroundTint="#00000000"
 
-                <TextView
-                    android:id="@+id/txtID"
-                    android:text="ID"
+                android:foreground="?android:selectableItemBackground"                >
+
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <Button
-                    android:layout_width="130dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/bg_tv"
-                    android:text="DONAR"
-                    android:textSize="20dp" />
-                <Button
-                    android:layout_width="130dp"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_margin="16dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/img_producto"
+                        android:layout_width="150dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/big" />
+
+                    <TextView
+                        android:id="@+id/txt_descp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textSize="15sp"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Hamburguesa \nRoyal"/>
+
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+
+        </LinearLayout>
+
+        <GridLayout
+            android:layout_weight="6"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:columnCount="2"
+            android:rowCount="1"
+            android:alignmentMode="alignMargins"
+            android:columnOrderPreserved="false">
+
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="-10dp"
+                card_view:cardElevation="2dp"
+                card_view:cardCornerRadius="13dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:backgroundTint="#fff952"
+
+                android:foreground="?android:selectableItemBackground"                >
+
+                <LinearLayout
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:gravity="center"
+                    android:layout_margin="16dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_tv"
-                    android:layout_marginTop="16dp"
-                    android:text="CANJEAR"
-                    android:textSize="20dp"/>
+                    >
+
+                    <ImageView
+                        android:src="@drawable/candado"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="80dp" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:textColor="#000000"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Comprar \nPendiente"/>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/btnBembos"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_marginBottom="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="-10dp"
+                card_view:cardElevation="2dp"
+                card_view:cardCornerRadius="13dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:backgroundTint="#fffdca"
+                android:foreground="?android:selectableItemBackground"
+                android:layout_row="0"
+                android:layout_column="1">
+
+                <LinearLayout
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:gravity="center"
+                    android:layout_margin="16dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <ImageView
+                        android:src="@drawable/mano"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="80dp" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="#000000"
+                        android:textSize="20sp"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Canjear \nPendiente"/>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+        </GridLayout>
+
+        <RelativeLayout
+            android:gravity="center"
+            android:layout_weight="3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <ImageView
+                android:id="@+id/img_empresa"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:src="@drawable/bembos"/>
+
+        </RelativeLayout>
 
 
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
-
-        <ImageView
-            android:id="@+id/logo"
-            android:src="@drawable/bembos"
-            android:layout_centerHorizontal="true"
-            android:layout_alignTop="@+id/card_view"
-            android:layout_marginTop="30dp"
-            android:layout_width="150dp"
-            android:layout_height="150dp" />
-    </RelativeLayout>
+    </LinearLayout>
 
 
 </FrameLayout>
