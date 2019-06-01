@@ -70,9 +70,10 @@ public class SeleccionFragment extends Fragment {
                             JSONObject jsonObj = new JSONObject(s);
                             JSONArray array = jsonObj.getJSONArray("data");
                             Log.e("data",""+jsonObj.get("data"));
-                            //JSONObject jsonObj2 = (JSONObject) array.get(0);
-
-                            //txtLab.setText(jsonObj2.getString("TXTDESCAULA"));
+                            JSONObject jsonObj2 = (JSONObject) array.get(0);
+                            Log.e("data",""+jsonObj2.getString("imagen_producto"));
+                            
+                            //txtLab.setText(jsonObj2.getString("imagen_producto"));
                         }
                     }
                 })
