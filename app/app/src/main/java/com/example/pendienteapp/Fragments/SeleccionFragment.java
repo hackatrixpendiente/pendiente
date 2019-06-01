@@ -13,10 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.example.pendienteapp.R;
 
 public class SeleccionFragment extends Fragment {
+
+    TextView id;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -30,6 +34,16 @@ public class SeleccionFragment extends Fragment {
                     .getColor(R.color.colorPrimary));
 
         }
+
+        Bundle bundle = this.getArguments();
+
+        id = view.findViewById(R.id.txtID);
+
+        id.setText(bundle.getString("id"));
+
+
+
+
         return view;
     }
 }
