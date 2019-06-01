@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@drawable/bg_btn2"
-            android:text="Compartir en Facebook"
+            android:text="Compartir ❤️"
             android:textAllCaps="false"
             android:textColor="#ffffff"
             android:textSize="20sp"/>
