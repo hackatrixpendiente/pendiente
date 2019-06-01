@@ -9,7 +9,7 @@ public interface INodeJS {
 
     @POST("horario")
     @FormUrlEncoded
-    Observable<String> horarioConfig(@Field("idusuario") Integer idusuario);
+    Observable<String> datosEmpresa(@Field("idusuario") Integer idusuario);
 
     @POST("clase")
     @FormUrlEncoded
