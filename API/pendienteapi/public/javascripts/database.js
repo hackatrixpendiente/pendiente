@@ -1,7 +1,7 @@
 var conString = {
   user: 'postgres',
-  password: 'postgresql',
-  database: 'BD_PALMITA',
+  password: '',
+  database: 'db_pendiente',
   port: '5432'
 };
 
