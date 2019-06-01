@@ -21,6 +21,7 @@ import com.example.pendienteapp.Retrofit.INodeJS;
 import com.example.pendienteapp.Retrofit.RetrofitClient;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -35,32 +36,50 @@ public class SeleccionFragment extends Fragment {
 
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     INodeJS myAPI;
-    @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_seleccion, container, false);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = ((Activity) getContext()).getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            //window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-            window.setStatusBarColor(getResources()
-                    .getColor(R.color.colorPrimary));
 
-        }
+        View view = inflater.inflate(R.layout.fragment_seleccion, container, false);
+
+        Window window = ((Activity) getContext()).getWindow();
+        window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
+
+        Retrofit retrofit = RetrofitClient.getInstance();
+
+
 
         Bundle bundle = this.getArguments();
 
         id = view.findViewById(R.id.txtID);
 
         id.setText(bundle.getString("id"));
-
-
-
-
-        Retrofit retrofit = RetrofitClient.getInstance();
         myAPI = retrofit.create(INodeJS.class);
-        compositeDisposable.add(myAPI.datosEmpresa(1)
+
+        datosEmpresa(1);
+        return view;
+    }
+
+    private void datosEmpresa(int i) {
+        compositeDisposable.add(myAPI.dataempresa(i)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws JSONException {
+                        if(s.contains("data")){
+                            JSONObject jsonObj = new JSONObject(s);
+                            JSONArray array = jsonObj.getJSONArray("data");
+                            Log.e("data",""+jsonObj.get("data"));
+                            //JSONObject jsonObj2 = (JSONObject) array.get(0);
+
+                            //txtLab.setText(jsonObj2.getString("TXTDESCAULA"));
+                        }
+                    }
+                })
+        );
+
+        /*
+        compositeDisposable.add(myAPI.dataempresa(i)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<String>() {
@@ -70,13 +89,12 @@ public class SeleccionFragment extends Fragment {
                             JSONObject jsonObj = new JSONObject(s);
                             JSONArray array = jsonObj.getJSONArray("data");
                             Log.e("data",""+jsonObj.get("data"));
-                            JSONObject jsonObj2 = (JSONObject) array.get(0);
+                            //JSONObject jsonObj2 = (JSONObject) array.get(0);
 
                             //txtLab.setText(jsonObj2.getString("TXTDESCAULA"));
                         }
                     }
                 })
-        );
-        return view;
+        );*/
     }
 }

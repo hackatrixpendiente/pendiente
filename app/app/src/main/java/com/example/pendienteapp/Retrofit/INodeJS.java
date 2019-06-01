@@ -7,9 +7,9 @@ import retrofit2.http.POST;
 
 public interface INodeJS {
 
-    @POST("horario")
+    @POST("empresa/producto")
     @FormUrlEncoded
-    Observable<String> datosEmpresa(@Field("idusuario") Integer idusuario);
+    Observable<String> dataempresa(@Field("idSede") Integer idSede);
 
     @POST("clase")
     @FormUrlEncoded
