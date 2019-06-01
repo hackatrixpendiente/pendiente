@@ -3,7 +3,7 @@ class M_datos extends  CI_Model{
     function __construct(){
         parent::__construct();
     }
-   /*function getDatosSede(){
+   function getDatosSede(){
         $sql = "SELECT s.id_sede,
                         s.nombre as sede,
                         s.direccion,
@@ -22,5 +22,5 @@ class M_datos extends  CI_Model{
                           AND d.estado = 'L'";
         $result = $this->db->query($sql, array());
         return $result->result();
-    }*/
+    }
 }

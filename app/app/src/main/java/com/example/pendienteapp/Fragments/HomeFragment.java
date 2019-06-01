@@ -50,7 +50,7 @@ public class HomeFragment extends Fragment {
         btnPardos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cargarFramento(new SeleccionFragment(),"2");
+                cargarFramento(new SeleccionFragment(),"3");
             }
         });
 
