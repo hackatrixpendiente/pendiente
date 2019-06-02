@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +36,7 @@ import java.util.Map;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
@@ -46,10 +49,13 @@ public class DonarFragment extends Fragment {
     private TextView txtMonto;
     private TextView txtSede;
     private Button btnComprar, btnfb;
+    private EditText cantidadText,mensajeText;
     private ImageView img_producto;
     public static String FACEBOOK_URL = "https://www.facebook.com/homer.lopezvidal";
     public static String FACEBOOK_PAGE_ID = "homer.lopezvidal";
     Map<String, Integer> map2 = new HashMap<>();
+    private Integer idusuario = 1;
+    private Integer idproducto;
 
 
     @Override
@@ -74,6 +80,9 @@ public class DonarFragment extends Fragment {
         btnComprar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                cantidadText = v.findViewById(R.id.cantidadText);
+                mensajeText = v.findViewById(R.id.mensajeText);
+                realizarCompra(idusuario,Integer.parseInt(cantidadText.getText().toString()),mensajeText.getText().toString());
                 Toast.makeText(getContext(), "Compra realizada", Toast.LENGTH_SHORT).show();
                 AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
                 dialog.setTitle("Felicitaciones");
@@ -127,12 +136,43 @@ public class DonarFragment extends Fragment {
                             txtSede.setText(jsonObj2.getString("nombre_sede"));
                             String im_producto = jsonObj2.getString("imagen_producto");
                             img_producto.setImageResource(map2.get(im_producto));
-
+                            idproducto = Integer.parseInt(jsonObj2.getString("id_producto"));
                         }
                     }
                 })
         );
         return view;
+    }
+
+    private void realizarCompra(Integer idusuario, Integer cantidadText, String mensajeText) {
+        compositeDisposable.add(myAPI.registroCompra(cantidadText,mensajeText,idproducto,idusuario)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        if(s.contains("data")){
+                            JSONObject jsonObj = new JSONObject(s);
+                            JSONArray array = jsonObj.getJSONArray("data");
+                            Log.e("data",""+jsonObj.get("data"));
+                            JSONObject jsonObj2 = (JSONObject) array.get(0);
+                            Log.e("data",""+jsonObj2.getString("imagen_producto"));
+                            txtEmpresa = getView().findViewById(R.id.txtEmpresa);
+                            txtEmpresa.setText("Empresa: "+jsonObj2.getString("nombre_empresa"));
+                            txtDesc = getView().findViewById(R.id.txtDesc);
+                            txtDesc.setText(jsonObj2.getString("descripcion_producto"));
+                            //txtLab.setText(jsonObj2.getString(nombre_empresa));
+                            txtMonto = getView().findViewById(R.id.txtMonto);
+                            txtMonto.setText("Precios: S/."+jsonObj2.getString("precio_producto"));
+                            txtSede = getView().findViewById(R.id.txtSede);
+                            txtSede.setText(jsonObj2.getString("nombre_sede"));
+                            String im_producto = jsonObj2.getString("imagen_producto");
+                            img_producto.setImageResource(map2.get(im_producto));
+
+                        }
+                    }
+                })
+        );
     }
 
     private void datosEmpresa(int i) {
