@@ -16,7 +16,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
+import com.example.pendienteapp.Fragments.HistorialFragment;
 import com.example.pendienteapp.Fragments.HomeFragment;
+import com.example.pendienteapp.Fragments.SeleccionFragment;
 
 public class MainappActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -32,7 +34,7 @@ public class MainappActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        cargarFramento(new HomeFragment());
+        cargarFramento(new HomeFragment(),null);
     }
 
     @Override
@@ -61,6 +63,7 @@ public class MainappActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            cargarFramento(new HistorialFragment(),"1");
             return true;
         }
 
@@ -92,8 +95,12 @@ public class MainappActivity extends AppCompatActivity
         return true;
     }
 
-    private void cargarFramento(Fragment fragment){
-        FragmentManager manager = getSupportFragmentManager();
+    private void cargarFramento(Fragment fragment, String id){
+        Bundle bundle = new Bundle();
+        bundle.putString("id",id);
+        fragment.setArguments(bundle);
+
+        FragmentManager manager = getSupportFragmentManager ();
         manager.beginTransaction().replace(R.id.containerFrag,fragment).addToBackStack(null).commit();
     }
 }
