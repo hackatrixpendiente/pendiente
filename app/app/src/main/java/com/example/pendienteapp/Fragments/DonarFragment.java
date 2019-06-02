@@ -99,10 +99,17 @@ public class DonarFragment extends Fragment {
                 btnfb.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
+                        /*Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
                         String facebookUrl = getFacebookPageURL(getContext());
                         facebookIntent.setData(Uri.parse(facebookUrl));
-                        startActivity(facebookIntent);
+                        startActivity(facebookIntent);*/
+                        //String message = "[Pendiente App] Acabo de realizar una colaboración, tú también puedes hacerlo! Búscannos en la PlayStore.";
+                        String message = "[Pendiente App] Acabo de realizar una colaboración, tú también puedes hacerlo! Siguenos en Facebook. https://bit.ly/2I8Q2bK";
+                        Intent share = new Intent(Intent.ACTION_SEND);
+                        share.setType("text/plain");
+                        share.putExtra(Intent.EXTRA_TEXT, message);
+
+                        startActivity(Intent.createChooser(share, "¡Comparte tu colaboración de PENDIENTE!"));
                         Toast.makeText(getContext(), "Abriendo Facebook", Toast.LENGTH_SHORT).show();
                     }
                 });

@@ -17,6 +17,19 @@
             android:layout_width="match_parent"
             android:layout_height="0dp">
 
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_btn3"
+                android:text="📍 UTEC - Universidad de Tecnologia"
+                android:textAllCaps="false"
+                android:textColor="#000000"
+                android:padding="10dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:textSize="13.5sp"/>
+
         </RelativeLayout>
 
         <TextView
