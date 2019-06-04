@@ -2,6 +2,7 @@ package com.example.pendienteapp.Retrofit;
 
 import android.widget.EditText;
 
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import retrofit2.http.Field;
@@ -31,4 +32,8 @@ public interface INodeJS {
                                    @Field("mensaje") String mensaje,
                                    @Field("idProducto") Integer idProducto,
                                    @Field("idUsuario") Integer idUsuario);
+
+    @POST("pendiente/historialPendientes")
+    @FormUrlEncoded
+    Observable<String> getHistorial(@Field("idUsuario") Integer idUsuario);
 }

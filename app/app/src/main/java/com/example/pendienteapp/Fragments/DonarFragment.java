@@ -80,9 +80,9 @@ public class DonarFragment extends Fragment {
         btnComprar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cantidadText = v.findViewById(R.id.cantidadText);
-                mensajeText = v.findViewById(R.id.mensajeText);
-                realizarCompra(idusuario,Integer.parseInt(cantidadText.getText().toString()),mensajeText.getText().toString());
+                //cantidadText = v.findViewById(R.id.cantidadText);
+                //mensajeText = v.findViewById(R.id.mensajeText);
+                //realizarCompra(idusuario,Integer.parseInt(cantidadText.getText().toString()),mensajeText.getText().toString());
                 Toast.makeText(getContext(), "Compra realizada", Toast.LENGTH_SHORT).show();
                 AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
                 dialog.setTitle("Felicitaciones");
@@ -110,7 +110,7 @@ public class DonarFragment extends Fragment {
                         share.putExtra(Intent.EXTRA_TEXT, message);
 
                         startActivity(Intent.createChooser(share, "¡Comparte tu colaboración de PENDIENTE!"));
-                        Toast.makeText(getContext(), "Abriendo Facebook", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Vamos a compartir!", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -143,7 +143,7 @@ public class DonarFragment extends Fragment {
                             txtSede.setText(jsonObj2.getString("nombre_sede"));
                             String im_producto = jsonObj2.getString("imagen_producto");
                             img_producto.setImageResource(map2.get(im_producto));
-                            idproducto = Integer.parseInt(jsonObj2.getString("id_producto"));
+                           // idproducto = Integer.parseInt(jsonObj2.getString("id_producto"));
                         }
                     }
                 })
